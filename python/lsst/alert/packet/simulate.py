@@ -73,12 +73,12 @@ def randomString():
                    for _ in range(random.randint(0, 10)))
 
 
-def randomBytes(max_bytes=1000):
+def randomBytes(min_bytes=1000, max_bytes=32000):
     """Provide a random value of the Avro `bytes` type.
 
     Up to `max_bytes` bytes are returned.
     """
-    return numpy.random.bytes(random.randint(0, max_bytes))
+    return numpy.random.bytes(random.randint(min_bytes, max_bytes))
 
 
 randomizerFunctionsByType = {
@@ -138,9 +138,13 @@ def simulate_alert(schema, keepNull=None, arrayCount=None):
         if ('null' in schema['type']) and (schema['name'] in keepNull):
             return {schema['name']: None}
         else:
-            # inferring the type like this this is not general but works
-            # for our application
-            schema['type'] = schema['type'][0]
+            if 'null' not in schema['type']:
+                schema['type'] = schema['type'][0]
+            elif 'null' in schema['type']: # pick the non-null type by default
+                idxs = list(range(0, len(schema['type'])))
+                idxs.pop(schema['type'].index('null'))
+                schema['type'] = schema['type'][idxs[0]]
+
 
     if type(schema['type']) is dict:
         # either an array, a record, or a nested type
