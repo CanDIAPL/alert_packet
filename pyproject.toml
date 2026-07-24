@@ -3,14 +3,17 @@ requires = ["setuptools>=61", "wheel", "lsst-versions >= 1.3.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "lsst-alert-packet"
-dynamic = ["version"]
-description = "Code for interacting with Vera C. Rubin Observatory alert packets"
+name = "candiapl-lsst-alert-packet"
+# name = "lsst-alert-packet"
+# dynamic = ["version"]
+version = "0.1.0"
+description = "CanDIAPL fork of LSST's lsst-alert-packet package for use with CanDIAPL/lass"
 authors = [
   { name = "Brianna Smart", email = "drbsmart@uw.edu" },
+  { name = "Mohammed Chamma", email = "mohammed.chamma@mail.mcgill.ca"}
 ]
 license = { text = "GPLv3" }
-urls = { "Homepage" = "https://github.com/lsst/alert_packet" }
+urls = { "Homepage" = "https://github.com/candiapl/alert_packet" }
 classifiers = [
   "Programming Language :: Python :: 3",
   "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
@@ -25,9 +28,9 @@ dependencies = [
 ]
 
 [project.scripts]
-validateAvroRoundTrip = "lsst.alert.packet.bin.validateAvroRoundTrip:main"
+# validateAvroRoundTrip = "lsst.alert.packet.bin.validateAvroRoundTrip:main"
 simulateAlerts = "lsst.alert.packet.bin.simulateAlerts:main"
-syncAllSchemasToRegistry = "lsst.alert.packet.bin.syncAllSchemasToRegistry:main"
+# syncAllSchemasToRegistry = "lsst.alert.packet.bin.syncAllSchemasToRegistry:main"
 
 [tool.setuptools]
 # This corresponds to:
